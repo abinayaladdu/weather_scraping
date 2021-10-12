@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> App</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <style>
+      body
+      {
+        background-color: rgb(252, 249, 249);
+      }
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+        }
+
+        #main {
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type='text'] {
+            width: 30%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px solid black;
+        }
+
+        input[type='date'] {
+            width: 30%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px solid black;
+        }
+
+        input[type='submit'] {
+            width: 30%;
+            padding: 5px;
+            background: rgb(36, 211, 45);
+            color: white;
+            text-transform: uppercase;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(218, 101, 188);">
+<div id="main">
+    <h1>Enter the city find the Weather</h1>
+    <form action="{{ url_for('weather')}}"method="post">
+        <div>
+            <label for="city"></label>
+            <input type="text" id="city" name='cityname'  placeholder="City or Country" name="city"/>
+        </div>
+        <div>
+            <label for="date"></label>
+            <input type="date" id = "sd" name="s" placeholder="Start date" name="s"/>
+            <script language="javascript">
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            
+            today = yyyy + '-' + mm + '-' + dd;
+            var nextWeekDate = new Date(new Date().getTime() + 11 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+            $('#sd').attr('min',today);
+            $('#sd').attr('max', nextWeekDate)
+            </script>
+            <label for="date"></label>
+            <input type="date" id = "ed" name="e" placeholder="end date" name="e"/>
+            <script language="javascript">
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            
+            today = yyyy + '-' + mm + '-' + dd;
+            var nextWeekDate = new Date(new Date().getTime() + 11 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+            $('#ed').attr('min',today);
+            $('#ed').attr('max', nextWeekDate)
+            </script>
+        <input type="submit" value="Submit"/>
+    </form>
+    <div style="font-size: 35px;font-weight: bold; text-align: center;">
+      {{result}}
+     </div>
+</div>
+</body>
+</html>
